@@ -1,0 +1,10 @@
+{
+  "name": "ar-viewer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Futuristic 3D showcase for the models in GLTFModels",
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs"
+  }
+}

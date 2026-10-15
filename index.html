@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Materia Lab · 3D Material Showcase</title>
+    <meta name="description" content="Explore six sustainable building materials as interactive 3D models." />
+    <meta name="theme-color" content="#050a1a" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <div class="bg" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Materia Lab home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <defs>
+            <linearGradient id="bm" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#22e6ff" />
+              <stop offset="1" stop-color="#9b5cff" />
+            </linearGradient>
+          </defs>
+          <path d="M16 2 29 9.5v13L16 30 3 22.5v-13Z" fill="none" stroke="url(#bm)" stroke-width="1.8" />
+          <path d="M16 2v28M3 9.5l13 7.5 13-7.5" fill="none" stroke="url(#bm)" stroke-width="1.2" opacity=".7" />
+        </svg>
+        <span>MATERIA<span class="brand-sub">.LAB</span></span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a class="nav-link" href="index.html" aria-current="page">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5" /><rect x="14" y="3" width="7" height="7" rx="1.5" /><rect x="3" y="14" width="7" height="7" rx="1.5" /><rect x="14" y="14" width="7" height="7" rx="1.5" /></svg>
+          <span class="label">Gallery</span>
+        </a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <span class="eyebrow"><span class="dot"></span>Sustainable Material Library</span>
+        <h1>Bio-based materials, <span class="gradient-text">rendered in real time.</span></h1>
+        <p class="lead">
+          Explore six low-carbon building materials as interactive 3D models. Open any specimen to orbit, zoom
+          and inspect its physically based surface textures up close, on desktop or mobile.
+        </p>
+        <ul class="hero-stats">
+          <li><strong>06</strong>Specimens</li>
+          <li><strong>PBR</strong>Baked textures</li>
+          <li><strong>WebGL</strong>Interactive viewer</li>
+        </ul>
+      </section>
+
+      <div class="section-head">
+        <h2 id="gallery-title">Specimen Index</h2>
+        <span>Select a tile to launch the viewer</span>
+      </div>
+      <div class="grid" id="grid">
+        <noscript>
+          <p style="grid-column: 1 / -1; color: var(--text-dim)">JavaScript is required to browse the 3D gallery.</p>
+        </noscript>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <span>© Materia Lab · 3D Material Showcase</span>
+      <span>Rendered with three.js</span>
+    </footer>
+
+    <script type="module" src="assets/js/home.js"></script>
+  </body>
+</html>

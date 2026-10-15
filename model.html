@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Model Viewer · Materia Lab</title>
+    <meta name="description" content="Interactive 3D viewer for a sustainable building material." />
+    <meta name="theme-color" content="#050a1a" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body class="model-page">
+    <div class="bg" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Materia Lab home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <defs>
+            <linearGradient id="bm" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#22e6ff" />
+              <stop offset="1" stop-color="#9b5cff" />
+            </linearGradient>
+          </defs>
+          <path d="M16 2 29 9.5v13L16 30 3 22.5v-13Z" fill="none" stroke="url(#bm)" stroke-width="1.8" />
+          <path d="M16 2v28M3 9.5l13 7.5 13-7.5" fill="none" stroke="url(#bm)" stroke-width="1.2" opacity=".7" />
+        </svg>
+        <span>MATERIA<span class="brand-sub">.LAB</span></span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a class="nav-link" href="index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5" /><rect x="14" y="3" width="7" height="7" rx="1.5" /><rect x="3" y="14" width="7" height="7" rx="1.5" /><rect x="14" y="14" width="7" height="7" rx="1.5" /></svg>
+          <span class="label">Gallery</span>
+        </a>
+      </nav>
+    </header>
+
+    <main class="viewer-layout" id="main">
+      <aside class="panel" aria-labelledby="model-name">
+        <a class="back-link" href="index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6" /></svg>
+          Back to gallery
+        </a>
+        <span class="chip" id="model-category">Specimen</span>
+        <h1 id="model-name">Loading…</h1>
+        <p id="model-desc"></p>
+
+        <dl class="specs-list">
+          <div><dt>Format</dt><dd>FBX · PBR</dd></div>
+          <div><dt>Download</dt><dd id="spec-size">—</dd></div>
+          <div><dt>Triangles</dt><dd id="spec-tris">—</dd></div>
+          <div><dt>Meshes</dt><dd id="spec-meshes">—</dd></div>
+        </dl>
+
+        <ul class="hint-list" aria-label="Viewer controls">
+          <li class="hint-mouse"><kbd>Left drag</kbd>Rotate</li>
+          <li class="hint-mouse"><kbd>Scroll</kbd>Zoom</li>
+          <li class="hint-mouse"><kbd>Right drag</kbd>Pan</li>
+          <li class="hint-touch"><kbd>1 finger</kbd>Rotate</li>
+          <li class="hint-touch"><kbd>Pinch</kbd>Zoom</li>
+          <li class="hint-touch"><kbd>2 fingers</kbd>Pan</li>
+        </ul>
+
+        <nav class="pager" aria-label="Other models">
+          <a id="prev-link" href="index.html"><small>← Previous</small><span>—</span></a>
+          <a id="next-link" href="index.html"><small>Next →</small><span>—</span></a>
+        </nav>
+      </aside>
+
+      <section class="stage" id="stage" aria-label="Interactive 3D viewer">
+        <span class="corner tl" aria-hidden="true"></span>
+        <span class="corner tr" aria-hidden="true"></span>
+        <span class="corner bl" aria-hidden="true"></span>
+        <span class="corner br" aria-hidden="true"></span>
+        <span class="stage-label" aria-hidden="true">Interactive viewport</span>
+
+        <div class="overlay" id="loading" role="status" aria-live="polite">
+          <div class="loader">
+            <div class="loader-ring">
+              <div class="spin"></div>
+              <svg viewBox="0 0 100 100" aria-hidden="true">
+                <defs>
+                  <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#22e6ff" />
+                    <stop offset="1" stop-color="#9b5cff" />
+                  </linearGradient>
+                </defs>
+                <circle class="track" cx="50" cy="50" r="46" />
+                <circle class="bar" id="loader-bar" cx="50" cy="50" r="46" />
+              </svg>
+              <span class="loader-pct" id="loader-pct">0%</span>
+            </div>
+            <div class="loader-status" id="loader-status">Initialising viewer…</div>
+            <div class="loader-note" id="loader-note"></div>
+          </div>
+        </div>
+
+        <div class="overlay" id="error" hidden role="alert">
+          <div class="error-card">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3Z" /><path d="M12 10v4M12 17.5v.01" /></svg>
+            <h2 id="error-title">Unable to load model</h2>
+            <p id="error-message">Something went wrong while loading this model.</p>
+            <code id="error-detail"></code>
+            <div class="error-actions">
+              <button class="btn" id="retry-btn" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>
+                Retry
+              </button>
+              <a class="btn btn-primary" href="index.html">Back to gallery</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="toast" id="toast" role="status"></div>
+
+        <div class="toolbar" role="toolbar" aria-label="Viewer tools">
+          <button class="tool" id="tool-rotate" type="button" aria-label="Auto-rotate" aria-pressed="true" title="Toggle auto-rotate">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7L21 8" /><path d="M21 3v5h-5" /></svg>
+            <span class="label">Auto-rotate</span>
+          </button>
+          <button class="tool" id="tool-wire" type="button" aria-label="Wireframe" aria-pressed="false" title="Toggle wireframe">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 21 7v10l-9 5-9-5V7Z" /><path d="M12 22V12M21 7l-9 5-9-5" /></svg>
+            <span class="label">Wireframe</span>
+          </button>
+          <button class="tool" id="tool-reset" type="button" aria-label="Reset camera" title="Reset camera">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3" /><path d="M12 2v4M12 18v4M2 12h4M18 12h4" /></svg>
+            <span class="label">Reset</span>
+          </button>
+          <button class="tool" id="tool-full" type="button" aria-label="Fullscreen" aria-pressed="false" title="Toggle fullscreen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5" /></svg>
+            <span class="label">Fullscreen</span>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="assets/js/viewer.js"></script>
+  </body>
+</html>
