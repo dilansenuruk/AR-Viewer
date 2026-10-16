@@ -1,0 +1,15 @@
+# Files in the repo root that must not be uploaded as public website assets.
+.git
+.gitignore
+.assetsignore
+.wrangler
+.vscode
+.claude
+node_modules
+package.json
+package-lock.json
+bun.lock
+bun.lockb
+wrangler.jsonc
+server.mjs
+README.md

@@ -1,0 +1,10 @@
+// Cloudflare Workers static-assets deployment (deploy command: npx wrangler deploy).
+// The site is served straight from the repo root; .assetsignore keeps tooling files out.
+{
+  "$schema": "https://unpkg.com/wrangler@4.151.1/config-schema.json",
+  "name": "ar-viewer",
+  "compatibility_date": "2026-10-12",
+  "assets": {
+    "directory": "."
+  }
+}
