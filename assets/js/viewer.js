@@ -211,8 +211,16 @@ async function start() {
     console.warn('Failed to load', url);
   };
 
-  const texLoader = new THREE.TextureLoader(manager);
   const dir = modelDir(model);
+  // Textures always sit next to the FBX, but some exports store their RelativeFilename
+  // with extra folders (e.g. "GLTFModels\<folder>\<file>.png"). Resolve every image by
+  // its bare filename inside the model's own folder.
+  manager.setURLModifier((url) => {
+    if (/^(blob|data):/.test(url) || !/\.(png|jpe?g|webp|tga)$/i.test(url)) return url;
+    return dir + url.split(/[\\/]/).pop();
+  });
+
+  const texLoader = new THREE.TextureLoader(manager);
   const maxAniso = renderer.capabilities.getMaxAnisotropy();
 
   // FBXLoader yields Phong materials and skips roughness/metalness maps.

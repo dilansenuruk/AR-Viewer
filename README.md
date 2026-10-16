@@ -27,7 +27,7 @@ No install step is needed. `server.mjs` is a zero-dependency static server. You 
 
 Although the folder is named `GLTFModels`, every model is a **binary FBX** file with external baked PBR textures (`_Diffuse`, `_Normal`, `_Roughness`, `_Metalness`, and `_Alpha` for the algae façade) stored next to it. The viewer loads the FBX with `FBXLoader`, which resolves the textures by their relative filenames. It then rebuilds each material as a `MeshStandardMaterial` and adds the roughness and metalness maps that `FBXLoader` skips.
 
-Each viewer page loads only its own model. The large models (coconut coir board, about 66 MB, and rice husk ash panel, about 63 MB) show download progress while they load.
+Each viewer page loads only its own model (about 4–9 MB each) and shows download progress while it loads. Textures are resolved by filename inside the model's own folder, so exports that store extra folders in their texture paths still work.
 
 ### Adding a model
 

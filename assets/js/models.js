@@ -11,7 +11,7 @@ export const MODELS = [
     category: 'Façade System',
     folder: 'Algae façade',
     file: 'Algae façade .fbx',
-    sizeMB: 5.8,
+    sizeMB: 5.7,
     textureSets: 1,
     accent: 'cyan',
     doubleSided: true,
@@ -24,7 +24,7 @@ export const MODELS = [
     category: 'Flooring',
     folder: 'Bamboo paraquet',
     file: 'Bamboo paraquet .fbx',
-    sizeMB: 24,
+    sizeMB: 3.9,
     textureSets: 1,
     accent: 'violet',
     description:
@@ -36,7 +36,7 @@ export const MODELS = [
     category: 'Insulation',
     folder: 'Coconut coir insulation board',
     file: 'Coconut coir insulat.fbx',
-    sizeMB: 66,
+    sizeMB: 8.9,
     textureSets: 3,
     accent: 'cyan',
     description:
@@ -48,7 +48,7 @@ export const MODELS = [
     category: 'Concrete',
     folder: 'Coconut shell biochar concrete',
     file: 'Coconut shell biocha.fbx',
-    sizeMB: 4.8,
+    sizeMB: 4.7,
     textureSets: 1,
     accent: 'violet',
     description:
@@ -72,7 +72,7 @@ export const MODELS = [
     category: 'Composite Panel',
     folder: 'Rice husk ash composite panel',
     file: 'Rice husk ash compos.fbx',
-    sizeMB: 63,
+    sizeMB: 8.1,
     textureSets: 2,
     accent: 'violet',
     description:
